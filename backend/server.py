@@ -47,6 +47,18 @@ class KeyArtResponse(BaseModel):
     created_at: str
 
 
+class ScoreSubmit(BaseModel):
+    player_name: str
+    score: int
+
+
+class ScoreEntry(BaseModel):
+    id: str
+    player_name: str
+    score: int
+    created_at: str
+
+
 # ---------- Prompt ----------
 BASE_PROMPT = (
     "A high-octane 3D game key art for a mobile game titled 'SOCIAL CHAOS'. "
@@ -145,6 +157,29 @@ async def generate_keyart(req: KeyArtRequest):
     except Exception as e:
         logger.exception("generate_keyart failed")
         raise HTTPException(status_code=500, detail=f"Generation failed: {e}")
+
+
+# ---------- Leaderboard ----------
+@api_router.post("/scores", response_model=ScoreEntry)
+async def submit_score(payload: ScoreSubmit):
+    name = (payload.player_name or "").strip()[:12].upper() or "ANON"
+    score = max(0, int(payload.score))
+    entry = {
+        "id": str(uuid.uuid4()),
+        "player_name": name,
+        "score": score,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    await db.scores.insert_one({**entry})
+    return ScoreEntry(**entry)
+
+
+@api_router.get("/scores/top")
+async def top_scores(limit: int = 10):
+    limit = max(1, min(50, int(limit)))
+    cursor = db.scores.find({}, {"_id": 0}).sort("score", -1).limit(limit)
+    items = await cursor.to_list(limit)
+    return {"scores": items}
 
 
 app.include_router(api_router)

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 import {
   Text,
   View,
@@ -242,6 +243,7 @@ export default function Index() {
   const [heroUri, setHeroUri] = useState<string>(DEFAULT_HERO);
   const [generating, setGenerating] = useState(false);
   const [caption, setCaption] = useState<string>("Official Key Art");
+  const router = useRouter();
 
   const regenerate = async () => {
     if (generating) return;
@@ -274,13 +276,7 @@ export default function Index() {
   };
 
   const play = () => {
-    const msg = "Match starting in 3... 2... 1... CHAOS!";
-    if (Platform.OS === "web") {
-      // @ts-ignore
-      if (typeof window !== "undefined") window.alert(msg);
-    } else {
-      Alert.alert("Let's go!", msg);
-    }
+    router.push("/play");
   };
 
   return (
