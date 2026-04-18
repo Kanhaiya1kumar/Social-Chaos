@@ -36,5 +36,18 @@ React-native-web 0.21 does not paint the `<Image>` container's `background-image
 - `/app/frontend/app/index.tsx` — Single-screen landing UI.
 - `/app/design_guidelines.json` — Design system reference.
 
-## Revenue / Growth Lever
-The REGEN ART CTA doubles as a viral hook: each regeneration is a unique shareable piece of AI-generated game art, perfect for social sharing to drive pre-registration sign-ups.
+## Dodge-Runner Mini-Game (added in iteration 2)
+- New route `/app/frontend/app/play.tsx` — 3-lane endless dodge-runner.
+- Player runs at the bottom of the field; hammers 🔨 and shopping carts 🛒 spawn from the top, falling at a speed that ramps with score.
+- Tap left/right half of the field or press ←/→ (web) to switch lanes.
+- Score = time survived × 10; speed multiplier shown in the HUD.
+- Collision = Game Over → player enters name → score POSTed to backend → global leaderboard refreshed.
+- Sound FX via Web Audio API tones on web (POW, near-miss, milestone, BOOM). `expo-av` installed for future native SFX.
+
+### New Backend Endpoints
+- `POST /api/scores` — body `{ player_name, score }`. Name uppercased + trimmed to 12 chars (empty → `ANON`). Stored in Mongo `scores` collection. Returns `ScoreEntry`.
+- `GET /api/scores/top?limit=10` — returns `{ scores: [...] }` sorted by score desc.
+
+### Navigation
+- `PLAY NOW` on the landing screen now routes via `router.push("/play")`.
+- In-game HOME buttons route back via `router.push("/")`.
