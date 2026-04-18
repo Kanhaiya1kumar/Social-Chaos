@@ -1,0 +1,102 @@
+{
+  "theme": "DARK",
+  "archetype": "7 (Electric & Neon) + 6 (Vibrant Play)",
+  "colors": {
+    "primary": "#FF007F",
+    "secondary": "#00F0FF",
+    "accent": "#FFD700",
+    "accent_secondary": "#FF4500",
+    "background_base": "#110B17",
+    "background_surface": "#2D004E",
+    "text_main": "#FFFFFF",
+    "text_muted": "#E0D7F5"
+  },
+  "typography": {
+    "heading_font": "Fredoka, sans-serif",
+    "body_font": "Outfit, sans-serif",
+    "scales": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter uppercase font-black",
+      "h2": "text-3xl sm:text-4xl tracking-tight uppercase font-black",
+      "body": "text-base sm:text-lg leading-relaxed",
+      "button": "text-lg sm:text-xl font-bold uppercase tracking-wide"
+    }
+  },
+  "layout_and_spacing": {
+    "mobile_first": true,
+    "container_padding": "p-4 sm:p-6",
+    "gap_standard": "gap-6",
+    "border_radius": "rounded-2xl",
+    "alignment": "optical_center_over_geometric"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#FF007F] text-white border-4 border-[#110B17] shadow-[4px_4px_0px_#110B17] rounded-xl active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#110B17] transition-all relative overflow-hidden font-black tracking-widest",
+      "secondary": "bg-[#00F0FF] text-[#110B17] border-4 border-[#110B17] shadow-[4px_4px_0px_#110B17] rounded-xl active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#110B17] transition-all font-black tracking-widest",
+      "comic_burst_wrapper": "absolute -top-3 -right-3 rotate-12 scale-110"
+    },
+    "cards": {
+      "roster_card": "bg-[#2D004E] border-4 border-[#110B17] shadow-[6px_6px_0px_#110B17] rounded-2xl overflow-hidden aspect-square flex items-center justify-center relative"
+    },
+    "badges": "bg-[#FFD700] text-[#110B17] font-bold text-xs uppercase px-3 py-1 border-2 border-[#110B17] rounded-full shadow-[2px_2px_0px_#110B17]",
+    "overlays": "bg-black/40 backdrop-blur-sm"
+  },
+  "animations": {
+    "bouncy_entrance": {
+      "initial": { "scale": 0.8, "opacity": 0, "y": 20 },
+      "animate": { "scale": 1, "opacity": 1, "y": 0 },
+      "transition": { "type": "spring", "stiffness": 400, "damping": 12 }
+    },
+    "title_jiggle": {
+      "animate": { "rotate": [-2, 2, -2] },
+      "transition": { "repeat": "Infinity", "duration": 2, "ease": "easeInOut" }
+    },
+    "bubble_pop": {
+      "initial": { "scale": 0, "rotate": -15 },
+      "animate": { "scale": 1, "rotate": 0 },
+      "transition": { "type": "spring", "bounce": 0.6 }
+    },
+    "loading_state": {
+      "animate": { "scale": [1, 1.1, 1], "rotate": [0, 5, -5, 0] },
+      "transition": { "repeat": "Infinity", "duration": 0.5 }
+    }
+  },
+  "media": {
+    "hero_key_art": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/80cfbec6-67ce-4b66-b1d8-ebd7fa33fe8d/images/74c6378d47fc3c930dcd200856271fffb7ef315d16dd808aa6fcaa22021d842b.png",
+      "description": "High-octane 3D game key art with diverse stylized low-poly characters in mid-air collision, chaotic urban playground, giant pink CHAOS BOMB, saturated pop colors."
+    },
+    "character_banana": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/80cfbec6-67ce-4b66-b1d8-ebd7fa33fe8d/images/85a26cd97c0e2e7c6259b4fd770b48cf6e02efe74571612f9e3aea9420c967e7.png",
+      "description": "3D ragdoll character in a banana suit, dropping coins."
+    },
+    "character_rocket": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/80cfbec6-67ce-4b66-b1d8-ebd7fa33fe8d/images/1d8f6e5532c10e3152f803299bb3576d6e11ce97aa6a45daecb025d0812e9c30.png",
+      "description": "3D mascot character riding a small red rocket."
+    },
+    "halftone_texture": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/80cfbec6-67ce-4b66-b1d8-ebd7fa33fe8d/images/d0c085c4316e82ac19fc5ad58f2eabfdfbd1ef57a00aafcc33d3bba46fd87cfe.png",
+      "description": "Comic book halftone pattern background for retro pop art texture overlays."
+    }
+  },
+  "testing_attributes": {
+    "requirement": "All interactive and key informational elements MUST include a data-testid attribute.",
+    "convention": "kebab-case, role-based",
+    "examples": [
+      "data-testid='hero-key-art-image'",
+      "data-testid='play-now-primary-button'",
+      "data-testid='regenerate-key-art-button'",
+      "data-testid='character-roster-preview-strip'"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Build as a mobile-first web app using React and Tailwind CSS (in .js files, not .tsx).",
+    "DO NOT USE Inter or Roboto fonts. Use 'Fredoka' for headings/title and 'Outfit' for body.",
+    "The hero section should be full-bleed using the hero_key_art image with a subtle halftone texture overlay.",
+    "Use Framer Motion to apply bouncy spring entrances to components, and bubble pop effects for the character roster strip.",
+    "The 'SOCIAL CHAOS' title should have a chunky 3D effect: glowing neon pink and blue text, heavy text-shadow, and a subtle jiggle animation.",
+    "Implement the 'Regenerate Key Art' CTA to mimic a loading state with a 'POW' or comic burst animation while a fake backend call resolves.",
+    "Character roster preview strip should sit at the bottom edge, using the character_banana and character_rocket images inside chunky bordered cards.",
+    "All buttons must have a solid 4px black border, heavy hard-shadow, and 'press-down' active state effect.",
+    "CRITICAL: Apply the `data-testid` attribute on all interactive elements as defined in the testing_attributes section."
+  ]
+}
